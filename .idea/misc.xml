@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/net.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_free.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35778985507246375" />
         <entry key="app/src/main/res/layout/article.xml" value="0.359375" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1" />
