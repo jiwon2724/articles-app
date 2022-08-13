@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), ArticleLoader {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewAdapter = ArticleAdapter(this)
+        viewAdapter = ArticleAdapter()
 
         binding.articles.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity(), ArticleLoader {
 
             GlobalScope.launch(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
-                viewAdapter.add(articles)
             }
         }
     }

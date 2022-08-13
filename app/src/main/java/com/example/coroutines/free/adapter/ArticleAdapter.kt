@@ -15,9 +15,8 @@ interface ArticleLoader {
     suspend fun loadMore()
 }
 
-class ArticleAdapter(private val loader: ArticleLoader): RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     private val articles: MutableList<Article> = mutableListOf()
-    private var loading = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.article, parent, false) as ConstraintLayout
@@ -30,17 +29,6 @@ class ArticleAdapter(private val loader: ArticleLoader): RecyclerView.Adapter<Ar
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = articles[position]
 
-        if(!loading && position >= articles.size -2) {
-            Log.d("current position : ", position.toString())
-            Log.d("loading true : ", articles.size.toString())
-            loading = true
-
-            GlobalScope.launch() {
-                loader.loadMore()
-                loading = false
-            }
-        }
-
         holder.feed.text = article.feed
         holder.title.text = article.title
         holder.summary.text = article.summary
@@ -50,8 +38,13 @@ class ArticleAdapter(private val loader: ArticleLoader): RecyclerView.Adapter<Ar
         return articles.size
     }
 
-    fun add(articles: List<Article>) {
-        this.articles.addAll(articles)
+    fun add(articles: Article) {
+        this.articles.add(articles)
+        notifyDataSetChanged()
+    }
+
+    fun clear(){
+        this.articles.clear()
         notifyDataSetChanged()
     }
 
